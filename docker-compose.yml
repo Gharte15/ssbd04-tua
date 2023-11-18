@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.2
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=siatka
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    volumes:
+      - ./init-db.sql:/data/application/init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-ppassword"]
+      interval: 5s
+      timeout: 30s
+      retries: 3
+    command: --init-file /data/application/init.sql
+
+  wildfly:
+    container_name: wildfly
+    image: quay.io/wildfly/wildfly:27.0.0.Final-jdk17
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - WILDFLY_USER=dupa
+        - WILDFLY_PASS=jasia
+        - DB_NAME=siatka
+        - DB_USER=root
+        - DB_PASS=password
+        - DB_URI=mysql:3306
+        - MYSQL_VERSION=8.2.0
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "9990:9990"
+    volumes:
+      - ./target/ssbd-group4-project.war:/opt/jboss/wildfly/standalone/deployments/ssbd-group4-project.war:ro
+      - .env:/opt/jboss/.env
+    env_file:
+      - ./.env
+    environment:
+      - WILDFLY_ADMIN_USER=admin
+      - WILDFLY_ADMIN_PASSWORD=secret
+      - WILDFLY_USER=admin
+      - WILDFLY_PASS=adminPassword
+      - DB_NAME=siatka
+      - DB_USER=root
+      - DB_PASS=password
+      - DB_URI=mysql:3306
+    networks:
+      - app-network
+    depends_on:
+       mysql:
+         condition: service_healthy
+
+networks:
+  app-network:
+    driver: bridge
