@@ -1,1 +1,1 @@
-# ssbd04-tua
+# to start: docker-compose up --build
