@@ -62,12 +62,12 @@
             <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>3.0.3</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.core</groupId>-->
+<!--            <artifactId>jersey-server</artifactId>-->
+<!--            <version>3.0.3</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.wildfly.plugins</groupId>
             <artifactId>wildfly-maven-plugin</artifactId>
@@ -91,6 +91,17 @@
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.postgresql</groupId>-->
+<!--            <artifactId>postgresql</artifactId>-->
+<!--            <version>42.6.0</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.27</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -175,11 +186,11 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-common</artifactId>
-            <version>3.0.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.core</groupId>-->
+<!--            <artifactId>jersey-common</artifactId>-->
+<!--            <version>3.0.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
@@ -210,76 +221,21 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>4.0.0.Final</version>
-                <executions>
-                    <!-- Deploy the JDBC driver -->
-                    <execution>
-                        <id>deploy-driver</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                            <name>mysql-connector.jar</name>
-                        </configuration>
-                        <goals>
-                            <goal>deploy-artifact</goal>
-                        </goals>
-                    </execution>
-                    <!-- Add a data source -->
-                    <execution>
-                        <id>add-datasource</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <address>subsystem=datasources,data-source=myDatasource</address>
-                            <resources>
-                                <resource>
-                                    <enableResource>true</enableResource>
-                                    <properties>
-                                        <connection-url>jdbc:mysql://mysql:3306/siatka</connection-url>
-                                        <jndi-name>java:/app/jdbc/siatka_admin</jndi-name>
-                                        <enabled>true</enabled>
-                                        <enable>true</enable>
-                                        <user-name>siatka_admin</user-name>
-                                        <password>siatka_admin</password>
-                                        <driver-name>mysql-connector.jar</driver-name>
-                                        <use-ccm>false</use-ccm>
-                                    </properties>
-                                </resource>
-                            </resources>
-                        </configuration>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                    </execution>
-                    <!-- Deploy the application on install -->
-                    <execution>
-                        <id>deploy</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-
+                <version>4.0.0.Beta2</version>
                 <configuration>
                     <feature-packs>
                         <feature-pack>
                             <location>org.wildfly:wildfly-galleon-pack:26.1.1.Final</location>
                         </feature-pack>
                     </feature-packs>
-                    <!-- Other WildFly plugin configurations -->
-
-                    <!-- Disable security realm -->
-                    <serverConfig>
-                        <security-realms>
-                            <security-realm name="ApplicationRealm" authentication="null">
-                                <!-- Set authentication to "null" to disable the security realm -->
-                            </security-realm>
-                        </security-realms>
-                    </serverConfig>
-
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
