@@ -207,79 +207,79 @@
     <build>
         <finalName>${final.name}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>4.2.0.Final</version>
-                <executions>
-                    <!-- Deploy the JDBC driver -->
-                    <execution>
-                        <id>deploy-driver</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                            <name>mysql-connector.jar</name>
-                        </configuration>
-                        <goals>
-                            <goal>deploy-artifact</goal>
-                        </goals>
-                    </execution>
-                    <!-- Add a data source -->
-                    <execution>
-                        <id>add-datasource</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <address>subsystem=datasources,data-source=myDatasource</address>
-                            <resources>
-                                <resource>
-                                    <enableResource>true</enableResource>
-                                    <properties>
-                                        <connection-url>jdbc:mysql://mysql:3306/siatka</connection-url>
-                                        <jndi-name>java:/app/jdbc/siatka_admin</jndi-name>
-                                        <enabled>true</enabled>
-                                        <enable>true</enable>
-                                        <user-name>siatka_admin</user-name>
-                                        <password>siatka_admin</password>
-                                        <driver-name>mysql-connector.jar</driver-name>
-                                        <use-ccm>false</use-ccm>
-                                    </properties>
-                                </resource>
-                            </resources>
-                        </configuration>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                    </execution>
-                    <!-- Deploy the application on install -->
-                    <execution>
-                        <id>deploy</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--            <plugin>-->
+<!--                <groupId>org.wildfly.plugins</groupId>-->
+<!--                <artifactId>wildfly-maven-plugin</artifactId>-->
+<!--                <version>4.2.0.Final</version>-->
+<!--                <executions>-->
+<!--                    &lt;!&ndash; Deploy the JDBC driver &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>deploy-driver</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <configuration>-->
+<!--                            <groupId>mysql</groupId>-->
+<!--                            <artifactId>mysql-connector-java</artifactId>-->
+<!--                            <name>mysql-connector.jar</name>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>deploy-artifact</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; Add a data source &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>add-datasource</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <configuration>-->
+<!--                            <address>subsystem=datasources,data-source=myDatasource</address>-->
+<!--                            <resources>-->
+<!--                                <resource>-->
+<!--                                    <enableResource>true</enableResource>-->
+<!--                                    <properties>-->
+<!--                                        <connection-url>jdbc:mysql://mysql:3306/siatka</connection-url>-->
+<!--                                        <jndi-name>java:/app/jdbc/siatka_admin</jndi-name>-->
+<!--                                        <enabled>true</enabled>-->
+<!--                                        <enable>true</enable>-->
+<!--                                        <user-name>siatka_admin</user-name>-->
+<!--                                        <password>siatka_admin</password>-->
+<!--                                        <driver-name>mysql-connector.jar</driver-name>-->
+<!--                                        <use-ccm>false</use-ccm>-->
+<!--                                    </properties>-->
+<!--                                </resource>-->
+<!--                            </resources>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>add-resource</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; Deploy the application on install &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>deploy</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>deploy</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
 
 
-                <configuration>
-                    <!-- Other WildFly plugin configurations -->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; Other WildFly plugin configurations &ndash;&gt;-->
 
-                    <!-- Disable security realm -->
-                    <serverConfig>
-                        <security-realms>
-                            <security-realm name="ApplicationRealm" authentication="null">
-                                <!-- Set authentication to "null" to disable the security realm -->
-                            </security-realm>
-                        </security-realms>
-                    </serverConfig>
-                    <feature-packs>
-                        <feature-pack>
-                            <location>org.wildfly:wildfly-galleon-pack:27.0.0.Alpha1</location>
-                        </feature-pack>
-                    </feature-packs>
-                </configuration>
-            </plugin>
+<!--                    &lt;!&ndash; Disable security realm &ndash;&gt;-->
+<!--                    <serverConfig>-->
+<!--                        <security-realms>-->
+<!--                            <security-realm name="ApplicationRealm" authentication="null">-->
+<!--                                &lt;!&ndash; Set authentication to "null" to disable the security realm &ndash;&gt;-->
+<!--                            </security-realm>-->
+<!--                        </security-realms>-->
+<!--                    </serverConfig>-->
+<!--                    <feature-packs>-->
+<!--                        <feature-pack>-->
+<!--                            <location>org.wildfly:wildfly-galleon-pack:27.0.0.Alpha1</location>-->
+<!--                        </feature-pack>-->
+<!--                    </feature-packs>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
