@@ -273,6 +273,11 @@
                             </security-realm>
                         </security-realms>
                     </serverConfig>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>org.wildfly:wildfly-galleon-pack:27.0.0.Alpha1</location>
+                        </feature-pack>
+                    </feature-packs>
                 </configuration>
             </plugin>
             <plugin>
