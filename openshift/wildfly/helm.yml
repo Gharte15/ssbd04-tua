@@ -1,0 +1,33 @@
+image:
+  name: tua04
+  tag: latest
+build:
+  enabled: true
+  mode: s2i
+  uri: 'https://github.com/Gharte15/ssbd04-tua.git'
+  output:
+    kind: ImageStreamTag
+    pushSecret: builder-dockercfg-kz8pw
+  triggers: {}
+  s2i:
+    builderImage: quay.io/wildfly/wildfly-centos7
+    runtimeImage: quay.io/wildfly/wildfly-runtime-centos7
+bootableJar:
+  builderImage: 'registry.access.redhat.com/ubi8/openjdk-17:latest'
+deploy:
+  enabled: true
+  replicas: 1
+  route:
+    enabled: true
+    tls:
+      enabled: true
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  livenessProbe:
+    httpGet:
+      path: /health/live
+      port: admin
+  readinessProbe:
+    httpGet:
+      path: /health/ready
+      port: admin
