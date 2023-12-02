@@ -1,11 +1,3 @@
-/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)
-/extension=org.wildfly.extension.microprofile.metrics-smallrye:add()
-/subsystem=microprofile-metrics-smallrye:add()
-/subsystem=microprofile-metrics-smallrye:write-attribute(name=security-enabled, value=false)
-/extension=org.wildfly.extension.microprofile.health-smallrye:add
-/subsystem=microprofile-health-smallrye:add
-/subsystem=microprofile-health-smallrye:write-attribute(name=security-enabled, value=false)
-
 data-source add \
 --name=siatka_admin \
 --jndi-name=java:/app/jdbc/siatka_admin \
@@ -14,3 +6,12 @@ data-source add \
 --driver-name=mysql \
 --connection-url=jdbc:mysql://mysql:3306/siatka \
 --enabled=true
+
+/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)
+/extension=org.wildfly.extension.microprofile.metrics-smallrye:add()
+/subsystem=microprofile-metrics-smallrye:add()
+/subsystem=microprofile-metrics-smallrye:write-attribute(name=security-enabled, value=false)
+/extension=org.wildfly.extension.microprofile.health-smallrye:add
+/subsystem=microprofile-health-smallrye:add
+/subsystem=microprofile-health-smallrye:write-attribute(name=security-enabled, value=false)
+
