@@ -5,3 +5,12 @@
 /extension=org.wildfly.extension.microprofile.health-smallrye:add
 /subsystem=microprofile-health-smallrye:add
 /subsystem=microprofile-health-smallrye:write-attribute(name=security-enabled, value=false)
+
+data-source add \
+--name=siatka_admin \
+--jndi-name=java:/app/jdbc/siatka_admin \
+--user-name=siatka_admin \
+--password=siatka_admin \
+--driver-name=mysql \
+--connection-url=jdbc:mysql://mysql:3306/siatka \
+--enabled=true
