@@ -23,7 +23,6 @@ services:
       timeout: 30s
       retries: 3
     command: --init-file /data/application/init.sql
-
   wildfly:
     container_name: wildfly
     image: quay.io/wildfly/wildfly:27.0.0.Final-jdk17
