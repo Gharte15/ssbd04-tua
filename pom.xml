@@ -221,7 +221,7 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>4.0.0.Beta2</version>
+                <version>4.2.0.Final</version>
                 <configuration>
                     <feature-packs>
                         <feature-pack>
@@ -230,53 +230,6 @@
                     </feature-packs>
                 </configuration>
                 <executions>
-                    <!-- Deploy the JDBC driver -->
-                    <execution>
-                        <id>deploy-driver</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <groupId>mysql</groupId>
-                            <artifactId>mysql-connector-java</artifactId>
-                            <name>mysql-connector.jar</name>
-                        </configuration>
-                        <goals>
-                            <goal>deploy-artifact</goal>
-                        </goals>
-                    </execution>
-                    <!--                     Add a data source -->
-                    <execution>
-                        <id>add-datasource</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <address>subsystem=datasources,data-source=myDatasource</address>
-                            <resources>
-                                <resource>
-                                    <enableResource>true</enableResource>
-                                    <properties>
-                                        <connection-url>jdbc:mysql://mysql:3306/siatka</connection-url>
-                                        <jndi-name>java:/app/jdbc/siatka_admin</jndi-name>
-                                        <enabled>true</enabled>
-                                        <user-name>root</user-name>
-                                        <password>password</password>
-                                        <driver-name>mysql-connector.jar</driver-name>
-                                    </properties>
-                                </resource>
-                            </resources>
-                            <execute-commands>
-                                <commands>
-                                    <command>
-                                        /subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi,
-                                        value=false)
-                                    </command>
-                                    <command>reload</command>
-                                </commands>
-                            </execute-commands>
-                        </configuration>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                    </execution>
-                    <!--                     Deploy the application on install -->
                     <execution>
                         <goals>
                             <goal>package</goal>

@@ -9,7 +9,7 @@ build:
     pushSecret: builder-dockercfg-9z8dj
   s2i:
     buildApplicationImage: true
-    builderImage: 'quay.io/wildfly/wildfly-s2i:latest'
+    builderImage: 'quay.io/wildfly/wildfly-s2i:latest-jdk17'
     runtimeImage: 'quay.io/wildfly/wildfly-runtime:latest'
   triggers: {}
 deploy:
