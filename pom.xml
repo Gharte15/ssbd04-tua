@@ -222,6 +222,36 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>4.2.0.Final</version>
+                <executions>
+                    <execution>
+                        <id>copy-env-file</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>cp</executable>
+                            <arguments>
+                                <argument>${project.basedir}/.env</argument>
+                                <argument>/home/jboss/.env</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-env-file-to-opt</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>cp</executable>
+                            <arguments>
+                                <argument>${project.basedir}/.env</argument>
+                                <argument>/opt/jboss/.env</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
                     <feature-packs>
                         <feature-pack>
