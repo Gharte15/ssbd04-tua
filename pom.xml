@@ -228,6 +228,17 @@
                             <location>org.wildfly:wildfly-galleon-pack:27.0.0.Final</location>
                         </feature-pack>
                     </feature-packs>
+                    <commands>
+                        <command>
+                            <command-line>cp ${project.basedir}/.env /home/jboss/</command-line>
+                        </command>
+                        <command>
+                            <command-line>
+                                --command="/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi,
+                                value=false)"
+                            </command-line>
+                        </command>
+                    </commands>
                 </configuration>
                 <executions>
                     <execution>
