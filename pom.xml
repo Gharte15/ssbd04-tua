@@ -241,6 +241,11 @@
                         <id>add-datasource</id>
                         <phase>install</phase>
                         <configuration>
+                            <feature-packs>
+                                <feature-pack>
+                                    <location>org.wildfly:wildfly-galleon-pack:27.0.0.Final</location>
+                                </feature-pack>
+                            </feature-packs>
                             <address>subsystem=datasources,data-source=myDatasource</address>
                             <resources>
                                 <resource>
