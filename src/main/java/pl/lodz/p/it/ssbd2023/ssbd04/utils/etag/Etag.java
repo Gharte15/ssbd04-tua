@@ -30,16 +30,6 @@ public class Etag {
 
     Dotenv dotenv = Dotenv.load();
 
-
-//    @PostConstruct
-//    public void init(){
-//        try {
-//            SECRET = new InitialContext().lookup("java:comp/env/ETAG_SECRET").toString();
-//        } catch (NamingException e) {
-//            throw new RuntimeException(e.getMessage());
-//        }
-//    }
-
     public boolean verifyTag(SignableEnt entity, String tag){
         String newTag = calculateSignature(entity);
         if (tag.equals(newTag)) {

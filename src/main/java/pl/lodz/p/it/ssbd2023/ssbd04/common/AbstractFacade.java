@@ -1,6 +1,5 @@
 package pl.lodz.p.it.ssbd2023.ssbd04.common;
 
-import jakarta.annotation.security.PermitAll;
 import jakarta.persistence.EntityManager;
 
 import java.io.Closeable;

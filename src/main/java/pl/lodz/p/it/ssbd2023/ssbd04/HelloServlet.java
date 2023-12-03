@@ -13,7 +13,6 @@ public class HelloServlet extends HttpServlet {
 
     public void init() {
         message = "Hello World!";
-//        clientService.createUser(new User("login", "password", "name", "lastname", "email", true, true, new Date(), new Locale("pl")));
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

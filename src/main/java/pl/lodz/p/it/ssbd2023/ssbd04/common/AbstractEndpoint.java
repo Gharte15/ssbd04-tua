@@ -4,7 +4,6 @@ import jakarta.persistence.OptimisticLockException;
 import lombok.Getter;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
-import pl.lodz.p.it.ssbd2023.ssbd04.common.TransactionInterface;
 import pl.lodz.p.it.ssbd2023.ssbd04.exceptions.AppOptimisticLockException;
 import pl.lodz.p.it.ssbd2023.ssbd04.exceptions.BaseApplicationException;
 
@@ -14,15 +13,6 @@ public class AbstractEndpoint implements TransactionInterface {
 
     @Getter
     private boolean lastTXRollback;
-
-//    @Inject
-//    private ConfigLoader configLoader;
-//
-//
-//    @PostConstruct
-//    public void init() {
-//        transactionRepetitionLimit = configLoader.getTransactionRepetitionLimit();
-//    }
 
     protected void repeatTransaction(VoidExecutor executor, TransactionInterface transactionComponent) throws BaseApplicationException {
         boolean isrollbackTX;
