@@ -230,13 +230,41 @@
                     </feature-packs>
                     <commands>
                         <command>
-                            <command-line>cp ${project.basedir}/.env /home/jboss/</command-line>
+                            <command-line>echo wykonuja sie skrypty z maven-wildfly-plugin</command-line>
+                        </command>
+                        <command>
+                            <command-line>cp ${project.basedir}/.env /opt/jboss/.env</command-line>
+                        </command>
+                        <command>
+                            <command-line>cp ${project.basedir}/.env /home/jboss/.env</command-line>
+                        </command>
+                        <command>
+                            <command-line>cp .env /opt/jboss/.env</command-line>
+                        </command>
+                        <command>
+                            <command-line>cp .env /home/jboss/.env</command-line>
+                        </command>
+                        <command>
+                            <command-line>cd /home/jboss/</command-line>
+                            <command-line>cp ${project.basedir}/.env .</command-line>
+                        </command>
+                        <command>
+                            <command-line>cp .env /opt/jboss/.env</command-line>
+                        </command>
+                        <command>
+                            <command-line>cp .env /home/jboss/</command-line>
+                        </command>
+                        <command>
+                            <command-line>echo wylaczanie jaspi</command-line>
                         </command>
                         <command>
                             <command-line>
                                 --command="/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi,
                                 value=false)"
                             </command-line>
+                        </command>
+                        <command>
+                            <command-line>echo skonczyly wykonwywac sie skrypty z maven-wildfly-plugin</command-line>
                         </command>
                     </commands>
                 </configuration>
