@@ -221,7 +221,14 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>4.2.0.Final</version>
+                <version>4.0.0.Beta2</version>
+                <configuration>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>org.wildfly:wildfly-galleon-pack:27.0.0.Final</location>
+                        </feature-pack>
+                    </feature-packs>
+                </configuration>
                 <executions>
                     <!-- Deploy the JDBC driver -->
                     <execution>
@@ -236,16 +243,11 @@
                             <goal>deploy-artifact</goal>
                         </goals>
                     </execution>
-                    <!-- Add a data source -->
+                    <!--                     Add a data source -->
                     <execution>
                         <id>add-datasource</id>
                         <phase>install</phase>
                         <configuration>
-                            <feature-packs>
-                                <feature-pack>
-                                    <location>org.wildfly:wildfly-galleon-pack:27.0.0.Final</location>
-                                </feature-pack>
-                            </feature-packs>
                             <address>subsystem=datasources,data-source=myDatasource</address>
                             <resources>
                                 <resource>
@@ -260,30 +262,27 @@
                                     </properties>
                                 </resource>
                             </resources>
+                            <execute-commands>
+                                <commands>
+                                    <command>
+                                        /subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi,
+                                        value=false)
+                                    </command>
+                                    <command>reload</command>
+                                </commands>
+                            </execute-commands>
                         </configuration>
                         <goals>
                             <goal>add-resource</goal>
                         </goals>
                     </execution>
-                    <!-- Deploy the application on install -->
+                    <!--                     Deploy the application on install -->
                     <execution>
-                        <id>deploy</id>
-                        <phase>install</phase>
                         <goals>
-                            <goal>deploy</goal>
+                            <goal>package</goal>
                         </goals>
                     </execution>
                 </executions>
-
-                <configuration>
-                    <!--Remove integrated jaspi-->
-                    <execute-commands>
-                        <commands>
-                            <command>/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)</command>
-                            <command>reload</command>
-                        </commands>
-                    </execute-commands>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
