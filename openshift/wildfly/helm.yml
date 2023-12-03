@@ -36,6 +36,21 @@ deploy:
       port: admin
     initialDelaySeconds: 5
     periodSeconds: 5
+  env:
+    - name: DB_NAME
+      value: "siatka"
+    - name: DB_USER
+      value: "root"
+    - name: DB_PASS
+      value: "password"
+    - name: DB_URI
+      value: "mysql:3306"
+    - name: JWT_SECRET
+      value: asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4
+    - name: ETAG_SECRET
+      value: 258AbqJCvhoWtVSI64m7Xpb6tpSJKpt6d7GRep82csg7jJzo9yu2whTOSQmkMjfpc2srXurE0G9LNn3NWbbT0yFgmWeW1y3VjB0sS
+    - name: EMAIL_PASSWORD
+      value: M0bnZK2gvQ8X73fy
   tls: {}
 image:
   tag: latest
